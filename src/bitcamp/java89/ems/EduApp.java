@@ -10,6 +10,8 @@ public class EduApp {
 
     System.out.println("비트캠프 관리시스템에 오신 걸 환영합니다.");
 
+    teacherController.doAutoAdd();
+
     loop:
     while (true) {
       System.out.print("명령> ");
@@ -18,6 +20,8 @@ public class EduApp {
         case "add" : teacherController.doAdd(); break;
         case "list" : teacherController.doList(); break;
         case "view" : teacherController.doView(); break;
+        case "update" : teacherController.doUpdate(); break;
+        case "delete" : teacherController.doDelete(); break;
         case "quit" :
           System.out.println("Good bye!");
           break loop;

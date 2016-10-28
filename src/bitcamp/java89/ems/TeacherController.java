@@ -11,6 +11,54 @@ public class TeacherController {
     this.keyScan = keyScan;
   }
 
+  public void doDelete() {
+    System.out.print("검색어(이름)> ");
+    String name = this.keyScan.nextLine().toLowerCase();
+    for (int i = 0; i < this.length; i++) {
+      if (this.teachers[i].name.toLowerCase().equals(name)) {
+        for (int x = i + 1; x < this.length; x++, i++) {
+          this.teachers[i] = this.teachers[x];
+        }
+        this.teachers[--length] = null;
+        System.out.printf("%s 강사님의 정보를 삭제하였습니다.\n", name);
+        return;
+      }
+    }
+    System.out.printf("%s 강사님의 정보가 없습니다. \n", name);
+  }
+
+  public void doUpdate() {
+    System.out.print("검색어(이름)> ");
+    String name = this.keyScan.nextLine().toLowerCase();
+    Teacher teacher = new Teacher();
+    for (int i = 0; i < this.length; i++) {
+      if (teachers[i].name.toLowerCase().equals(name)) {
+        while (true) {
+          System.out.printf("이름 : %s", teachers[i].name);
+          teacher.name = teachers[i].name;
+          System.out.printf("\n분야? ", teachers[i].language);
+          teacher.language = this.keyScan.nextLine();
+          System.out.printf("경력? ", teachers[i].career);
+          teacher.career = this.keyScan.nextLine();
+          System.out.printf("저서? ", teachers[i].writing);
+          teacher.writing = this.keyScan.nextLine();
+          System.out.print("정말 변경하시겠습니까? (y/n)");
+          if (this.keyScan.nextLine().toLowerCase().equals("y")) {
+            teachers[i] = teacher;
+            System.out.println("변경되었습니다.");
+            break;
+          } else {
+              break;
+          }
+        }
+        break;
+      } else {
+        System.out.println("검색하신 정보가 없습니다. 다시 입력해주세요.");
+        return;
+      }
+    }
+  }
+
   public void doView() {
     System.out.print("검색어(이름)> ");
     String name = this.keyScan.nextLine().toLowerCase();
@@ -57,5 +105,25 @@ public class TeacherController {
         break;
       }
     }
+  }
+
+  public void doAutoAdd() {
+    Teacher teacher = new Teacher();
+
+    teacher.name = "엄진영";
+    teacher.language = "java, c, c++ 등";
+    teacher.career = "10년 이상";
+    teacher.writing = "열혈강의: 자바 웹 개발 워크북 (프리렉)";
+    teachers[0] = teacher;
+    teacher.name = "한동은";
+    teacher.language = "java";
+    teacher.career = "1년 이상";
+    teacher.writing = "없음";
+    teachers[1] = teacher;
+    teacher.name = "이성복";
+    teacher.language = "java, c";
+    teacher.career = "3년 이상";
+    teacher.writing = "자바의 정석 (이성복 에디션)";
+    teachers[2] = teacher;
   }
 }
