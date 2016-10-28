@@ -1,4 +1,5 @@
 package bitcamp.java89.ems;
+
 import java.util.Scanner;
 
 public class TeacherController {
