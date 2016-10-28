@@ -3,15 +3,34 @@ package bitcamp.java89.ems;
 import java.util.Scanner;
 
 public class TeacherController {
-  Teacher[] teachers = new Teacher[100];
-  int length = 0;
-  Scanner keyScan;
+  private Teacher[] teachers = new Teacher[100];
+  private int length = 0;
+  private Scanner keyScan;
 
   public TeacherController(Scanner keyScan) {
     this.keyScan = keyScan;
   }
 
-  public void doDelete() {
+  public void service() {
+    loop:
+    while (true) {
+      System.out.print("강사관리> ");
+
+      switch (keyScan.nextLine().toLowerCase()) {
+        case "add" : this.doAdd(); break;
+        case "list" : this.doList(); break;
+        case "view" : this.doView(); break;
+        case "update" : this.doUpdate(); break;
+        case "delete" : this.doDelete(); break;
+        case "main" :
+          break loop;
+        default :
+          System.out.println("지원하지 않는 명령어입니다.");
+      }
+    }
+  }
+
+  private void doDelete() {
     System.out.print("검색어(이름)> ");
     String name = this.keyScan.nextLine().toLowerCase();
     for (int i = 0; i < this.length; i++) {
@@ -27,7 +46,7 @@ public class TeacherController {
     System.out.printf("%s 강사님의 정보가 없습니다. \n", name);
   }
 
-  public void doUpdate() {
+  private void doUpdate() {
     System.out.print("검색어(이름)> ");
     String name = this.keyScan.nextLine().toLowerCase();
     Teacher teacher = new Teacher();
@@ -59,7 +78,7 @@ public class TeacherController {
     }
   }
 
-  public void doView() {
+  private void doView() {
     System.out.print("검색어(이름)> ");
     String name = this.keyScan.nextLine().toLowerCase();
     for (int i = 0; i < this.length; i++) {
@@ -73,7 +92,7 @@ public class TeacherController {
     }
   }
 
-  public void doList() {
+  private void doList() {
     for (int i = 0; i < length; i++) {
       Teacher teacher = this.teachers[i];
 
@@ -85,7 +104,7 @@ public class TeacherController {
     }
   }
 
-  public void doAdd() {
+  private void doAdd() {
     while (this.length < this.teachers.length) {
       Teacher teacher = new Teacher();
 
